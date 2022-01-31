@@ -1,0 +1,3 @@
+tests/
+cmake-build-debug
+.idea/
