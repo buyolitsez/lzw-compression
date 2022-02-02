@@ -1,0 +1,16 @@
+#ifndef PATH_TO_ROOT_H
+#define PATH_TO_ROOT_H
+
+#include <stdbool.h>
+#include <stdio.h>
+
+#include "trie.h"
+#include "io.h"
+
+void flushPathBuffer(FILE *stream);
+
+void write_path_to_root_reversed(node_t *node);
+
+int get_first_element();
+
+#endif //PATH_TO_ROOT_H

@@ -8,8 +8,8 @@
 
 void write_to_file(int buff, int wordSizeBits, FILE *stream);
 
-void end_writing(int wordSizeBits, FILE *stream);
-
 int read_single_word(int countBit, FILE *stream);
+
+void flushWritingBuffer(FILE *stream);
 
 #endif //IO_H
