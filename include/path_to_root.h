@@ -7,7 +7,7 @@
 #include "trie.h"
 #include "io.h"
 
-void flushPathBuffer(FILE *stream);
+void flush_path_buffer(FILE *stream);
 
 void write_path_to_root_reversed(node_t *node);
 

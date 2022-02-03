@@ -8,22 +8,22 @@ void encode_to_file(char *fromFile, char *toFile) {
         return;
     }
     node_t *root = init();
-    int currWord = read_single_word(SINGLE_READING_BITS, inputFile);
-    int wordSizeBits = ALPHABET_SIZE_BITS + 1;
+    int currWord = read_single_word(ALPHABET_SIZE_BITS, inputFile);
     while (currWord != EOF) {
         node_t *currNode = root;
         while (currWord != EOF && currNode->child[currWord] != NULL) {
             currNode = currNode->child[currWord];
-            currWord = read_single_word(SINGLE_READING_BITS, inputFile);
+            currWord = read_single_word(ALPHABET_SIZE_BITS, inputFile);
         }
         fprintf(stderr, "%d ", currNode->index);
-        write_to_file(currNode->index, wordSizeBits, outputFile);
+        fprintf(stderr, " - %d \n", get_word_size_bits());
+        write_to_file(currNode->index, get_word_size_bits(), outputFile);
         if (currWord != EOF) {
             create_node(currNode, currWord);
         }
     }
-    write_to_file(EOI, wordSizeBits, outputFile);
-    flushWritingBuffer(outputFile);
+    write_to_file(EOI, get_word_size_bits(), outputFile);
+    flush_writing_buffer(outputFile);
     fclose(inputFile);
     fclose(outputFile);
     delete_trie(root);

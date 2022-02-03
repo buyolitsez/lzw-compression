@@ -10,6 +10,6 @@ void write_to_file(int buff, int wordSizeBits, FILE *stream);
 
 int read_single_word(int countBit, FILE *stream);
 
-void flushWritingBuffer(FILE *stream);
+void flush_writing_buffer(FILE *stream);
 
 #endif //IO_H

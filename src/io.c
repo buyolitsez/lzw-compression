@@ -22,7 +22,7 @@ void write_to_file(int buff, int wordSizeBits, FILE *stream) {
     }
 }
 
-void flushWritingBuffer(FILE *stream) {
+void flush_writing_buffer(FILE *stream) {
     while (cntWriting != 0) {
         write_single_bit(0, stream);
     }

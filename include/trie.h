@@ -20,6 +20,12 @@ node_t *init();
 
 void delete_trie(node_t *root);
 
-int max_index_used();
+int get_word_size_bits();
+
+int get_curr_index();
+
+void increment_index();
+
+void decrement_index();
 
 #endif //TRIE_H

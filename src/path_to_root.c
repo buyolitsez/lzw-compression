@@ -3,7 +3,7 @@
 static int buffer[1024];
 int cnt = 0;
 
-void flushPathBuffer(FILE *stream) {
+void flush_path_buffer(FILE *stream) {
     while (cnt) {
         write_to_file(buffer[--cnt], ALPHABET_SIZE_BITS, stream);
     }
