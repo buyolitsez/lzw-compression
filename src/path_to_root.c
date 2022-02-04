@@ -13,6 +13,7 @@ void write_path_to_root_reversed(node_t *node) {
     node_t *currNode = node;
     assert(currNode != NULL);
     while (currNode->index != -1) { // while not root
+        assert(cnt < 1024);
         buffer[cnt++] = currNode->wordToParent;
         currNode = currNode->parent;
     }

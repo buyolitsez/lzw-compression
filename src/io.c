@@ -4,7 +4,7 @@
 static int cntWriting = 0;
 
 inline static void write_single_bit(bool bit, FILE *stream) {
-    static char buffer = 0;
+    static int buffer = 0;
     if (bit) {
         buffer |= (1 << cntWriting);
     }
@@ -28,7 +28,7 @@ void flush_writing_buffer(FILE *stream) {
     }
 }
 
-static char readingBuffer = 0;
+static int readingBuffer = 0;
 static int readingCnt = 8;
 
 static inline int read_single_bit(FILE *stream) {

@@ -28,8 +28,9 @@ void decode_to_file(char *fromFile, char *toFile) {
             */
             increment_index();
             currWord = read_single_word(get_word_size_bits(), inputFile);
+            fprintf(stderr, "%d - %d\n", currWord, get_word_size_bits());
             decrement_index();
-            if (currWord == EOI) {
+            if (currWord == EOI || currWord == EOF) {
                 break;
             }
             if (dict[currWord] == NULL) { // word and element to be added are the same
