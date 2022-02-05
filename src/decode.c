@@ -15,7 +15,6 @@ void decode_to_file(char *fromFile, char *toFile) {
         dict[i] = root->child[i];
     }
     while (true) {
-        bool wasReset = false;
         if (prevNode == NULL) {
             currWord = read_single_word(get_word_size_bits(), inputFile);
             if (currWord == EOI) {
@@ -26,11 +25,9 @@ void decode_to_file(char *fromFile, char *toFile) {
         } else {
             /* because in encoding, we firstly add element to dictionary and only then write next word,
             * but in decoding we firstly need to read next word and only then add element to dictionary,
-            * so we save index for further adding
+            * so we increment index to calculate correct word size bits
             */
-            wasReset = increment_index(&root);
-            if (wasReset) { // clear dictionary and start again
-//                write_to_file('|', 8, outputFile);
+            if (increment_index(&root)) { // clear dictionary and start again
                 prevNode = NULL;
                 memset(dict, 0, sizeof(dict));
                 for (int i = 0; i < ALPHABET_SIZE; ++i) {
@@ -39,35 +36,22 @@ void decode_to_file(char *fromFile, char *toFile) {
                 continue;
             }
             currWord = read_single_word(get_word_size_bits(), inputFile);
-            fprintf(stderr, "%d - %d\n", currWord, get_word_size_bits());
-            decrement_index();
-            if (currWord == EOI || currWord == EOF) {
+            decrement_index(); // because we increment it before
+            if (currWord == EOI)
                 break;
-            }
             if (dict[currWord] == NULL) { // word and element to be added are the same
                 //prevWord + prevWord[0]
                 assert(prevNode != NULL);
                 int wordToParent = get_first_element(prevNode);
-                wasReset = create_node(&root, prevNode, wordToParent, &dict[currWord]);
+                dict[currWord] = create_node(&root, prevNode, wordToParent);
             } else {
-                //index = X, then X++, then newNode->index = X + 1 and X + 2
-                //i need to create with index X, so decrement twice
-                node_t *newNode;
-                wasReset = create_node(&root, prevNode, get_first_element(dict[currWord]), &newNode);
+                node_t *newNode = create_node(&root, prevNode, get_first_element(dict[currWord]));
                 dict[newNode->index] = newNode;
             }
             prevNode = dict[currWord];
         }
         write_path_to_root_reversed(dict[currWord]);
         flush_path_buffer(outputFile);
-        if (wasReset) {
-            assert(false);
-            prevNode = NULL;
-            memset(dict, 0, sizeof(dict));
-            for (int i = 0; i < ALPHABET_SIZE; ++i) {
-                dict[i] = root->child[i];
-            }
-        }
     }
     flush_writing_buffer(outputFile);
     fclose(inputFile);

@@ -8,4 +8,8 @@
 #define CLC (ALPHABET_SIZE) // reset dictionary
 #define EOI (ALPHABET_SIZE + 1) // end of input
 
+#define BUFFER_SIZE_WORDS 1024
+
+#define CHAR_SIZE_BITS (sizeof(char) * 8)
+
 #endif // CONSTANTS_H

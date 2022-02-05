@@ -5,7 +5,8 @@
 #include <stdio.h>
 
 #include "trie.h"
-#include "io.h"
+#include "input.h"
+#include "output.h"
 
 void encode_to_file(char *fromFile, char *toFile);
 

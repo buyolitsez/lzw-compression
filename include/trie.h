@@ -15,15 +15,22 @@ typedef struct node {
     struct node *child[ALPHABET_SIZE];
 } node_t;
 
-bool create_node(node_t **root, node_t *parent, int wordToParent, node_t **newNode);
+inline void* mymalloc(ssize_t size) {
+    void* res = malloc(size);
+    if (res == NULL) {
+        fprintf(stderr, "not enough memory to allocate %ld bytes\n", size);
+        exit(-1);
+    }
+    return res;
+}
+
+node_t* create_node(node_t **root, node_t *parent, int wordToParent);
 
 node_t *init();
 
 void delete_trie(node_t *root);
 
 int get_word_size_bits();
-
-int get_curr_index();
 
 bool increment_index(node_t **root);
 

@@ -15,13 +15,9 @@ void encode_to_file(char *fromFile, char *toFile) {
             currNode = currNode->child[currWord];
             currWord = read_single_word(ALPHABET_SIZE_BITS, inputFile);
         }
-        fprintf(stderr, "%d ", currNode->index);
-        fprintf(stderr, " - %d \n", get_word_size_bits());
         write_to_file(currNode->index, get_word_size_bits(), outputFile);
         if (currWord != EOF) {
-            node_t *res;
-            create_node(&root, currNode, currWord, &res);
-            res;
+            create_node(&root, currNode, currWord);
         }
     }
     write_to_file(EOI, get_word_size_bits(), outputFile);

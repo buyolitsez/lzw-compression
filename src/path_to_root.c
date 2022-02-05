@@ -16,11 +16,9 @@ void write_path_to_root_reversed(node_t *node) {
     while (currNode->index != -1) { // while not root
         if (bufferSize == 0) {
             bufferSize = BUFFER_SIZE_WORDS;
-            buffer = (int *) malloc(sizeof(int) * bufferSize);
-            assert(buffer != NULL); //TODO
+            buffer = (int *) mymalloc(sizeof(int) * bufferSize);
         } else if (cnt == bufferSize) {
-            int *newBuffer = (int *) malloc(sizeof(int) * 2ll * bufferSize);
-            assert(newBuffer != NULL); //TODO
+            int *newBuffer = (int *) mymalloc(sizeof(int) * 2ll * bufferSize);
             memcpy(newBuffer, buffer, sizeof(int) * bufferSize);
             free(buffer);
             buffer = newBuffer;
@@ -33,6 +31,7 @@ void write_path_to_root_reversed(node_t *node) {
 
 int get_first_element(node_t *node) {
     write_path_to_root_reversed(node);
+    assert(cnt >= 0);
     int answer = buffer[cnt - 1];
     cnt = 0;
     return answer;

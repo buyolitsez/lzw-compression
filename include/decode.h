@@ -6,7 +6,8 @@
 #include <assert.h>
 
 #include "constants.h"
-#include "io.h"
+#include "input.h"
+#include "output.h"
 #include "trie.h"
 #include "path_to_root.h"
 
