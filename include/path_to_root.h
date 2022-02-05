@@ -6,6 +6,7 @@
 
 #include "trie.h"
 #include "io.h"
+#include "constants.h"
 
 void flush_path_buffer(FILE *stream);
 

@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <assert.h>
+#include <stdbool.h>
 
 #include "constants.h"
 
@@ -14,7 +15,7 @@ typedef struct node {
     struct node *child[ALPHABET_SIZE];
 } node_t;
 
-node_t *create_node(node_t *parent, int wordToParent);
+bool create_node(node_t **root, node_t *parent, int wordToParent, node_t **newNode);
 
 node_t *init();
 
@@ -24,7 +25,7 @@ int get_word_size_bits();
 
 int get_curr_index();
 
-void increment_index();
+bool increment_index(node_t **root);
 
 void decrement_index();
 

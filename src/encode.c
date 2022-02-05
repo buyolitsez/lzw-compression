@@ -19,7 +19,9 @@ void encode_to_file(char *fromFile, char *toFile) {
         fprintf(stderr, " - %d \n", get_word_size_bits());
         write_to_file(currNode->index, get_word_size_bits(), outputFile);
         if (currWord != EOF) {
-            create_node(currNode, currWord);
+            node_t *res;
+            create_node(&root, currNode, currWord, &res);
+            res;
         }
     }
     write_to_file(EOI, get_word_size_bits(), outputFile);
